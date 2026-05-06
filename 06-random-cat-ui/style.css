@@ -1,0 +1,721 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+
+    font-family: 'Poppins', sans-serif;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #071b1b 0%,
+            #0d2d2d 50%,
+            #103f3f 100%
+        );
+
+    color: white;
+
+    transition: 0.3s ease;
+}
+
+
+
+/* =========================
+   LIGHT THEME
+========================= */
+
+body.light {
+
+    background:
+        linear-gradient(
+            135deg,
+            #dff7f5 0%,
+            #f1fffd 100%
+        );
+
+    color: #111111;
+}
+
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 24px 40px;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+
+    backdrop-filter: blur(14px);
+
+    background:
+        rgba(0,0,0,0.2);
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.08);
+}
+
+
+
+body.light .navbar {
+
+    background:
+        rgba(255,255,255,0.4);
+
+    border-bottom:
+        1px solid rgba(0,0,0,0.08);
+}
+
+
+
+.navbar h1 {
+
+    font-size: 2rem;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+
+/* =========================
+   THEME BUTTON
+========================= */
+
+#theme-btn {
+
+    border: none;
+
+    outline: none;
+
+    padding: 12px 22px;
+
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    font-size: 0.95rem;
+
+    font-weight: 600;
+
+    background:
+        linear-gradient(
+            135deg,
+            #14b8a6,
+            #06b6d4
+        );
+
+    color: white;
+
+    transition: 0.3s ease;
+}
+
+
+
+#theme-btn:hover {
+
+    transform: translateY(-2px);
+
+    opacity: 0.9;
+}
+
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.main-container {
+
+    width: 100%;
+
+    min-height: calc(100vh - 100px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 40px 20px;
+}
+
+
+
+/* =========================
+   CARD WRAPPER
+========================= */
+
+.cat-card {
+
+    width: 100%;
+
+    max-width: 1050px;
+}
+
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        1.1fr 1fr;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(18px);
+
+    border-radius: 32px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition: 0.4s ease;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.35);
+}
+
+
+
+body.light .card {
+
+    background:
+        rgba(255,255,255,0.6);
+
+    border:
+        1px solid rgba(0,0,0,0.08);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.08);
+}
+
+
+
+.card:hover {
+
+    transform: translateY(-8px);
+}
+
+
+
+/* =========================
+   CAT IMAGE
+========================= */
+
+.cat-image {
+
+    width: 100%;
+
+    height: 100%;
+
+    min-height: 500px;
+
+    object-fit: cover;
+}
+
+
+
+/* =========================
+   CARD CONTENT
+========================= */
+
+.card-content {
+
+    padding: 40px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 18px;
+}
+
+
+
+.card-content h2 {
+
+    font-size: 3rem;
+
+    font-weight: 700;
+
+    line-height: 1.1;
+}
+
+
+
+.card-content p {
+
+    font-size: 1.05rem;
+
+    line-height: 1.8;
+
+    opacity: 0.9;
+}
+
+
+
+/* =========================
+   FETCH BUTTON
+========================= */
+
+#fetch-btn {
+
+    margin-top: 10px;
+
+    border: none;
+
+    outline: none;
+
+    width: fit-content;
+
+    padding: 16px 24px;
+
+    border-radius: 16px;
+
+    cursor: pointer;
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    background:
+        linear-gradient(
+            135deg,
+            #14b8a6,
+            #06b6d4
+        );
+
+    color: white;
+
+    transition: 0.3s ease;
+}
+
+
+
+#fetch-btn:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(20,184,166,0.35);
+}
+
+
+
+/* =========================
+   LOADER
+========================= */
+
+#loader {
+
+    text-align: center;
+
+    padding-bottom: 30px;
+
+    font-size: 1rem;
+
+    opacity: 0.8;
+}
+
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+    background:
+        rgba(0,0,0,0.75);
+
+    backdrop-filter: blur(10px);
+
+    z-index: 999;
+}
+
+
+
+/* =========================
+   MODAL CONTENT
+========================= */
+
+.modal-content {
+
+    width: 100%;
+
+    max-width: 950px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    scrollbar-width: none;
+
+    background:
+        #0f2222;
+
+    border-radius: 28px;
+
+    padding: 40px;
+
+    position: relative;
+
+    animation: popup 0.35s ease;
+}
+
+
+
+.modal-content::-webkit-scrollbar {
+
+    display: none;
+}
+
+
+
+body.light .modal-content {
+
+    background: white;
+
+    color: #111111;
+}
+
+
+
+/* =========================
+   MODAL IMAGE
+========================= */
+
+.modal-image {
+
+    width: 100%;
+
+    height: 420px;
+
+    object-fit: cover;
+
+    border-radius: 20px;
+
+    margin-bottom: 30px;
+}
+
+
+
+/* =========================
+   MODAL TEXT
+========================= */
+
+#modal-body h2 {
+
+    font-size: 2.5rem;
+
+    margin-bottom: 20px;
+}
+
+
+
+.description {
+
+    line-height: 1.9;
+
+    margin-bottom: 28px;
+
+    opacity: 0.9;
+}
+
+
+
+/* =========================
+   DETAILS GRID
+========================= */
+
+.details {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 30px;
+}
+
+
+
+.details p {
+
+    background:
+        rgba(255,255,255,0.06);
+
+    padding: 16px;
+
+    border-radius: 14px;
+
+    line-height: 1.6;
+}
+
+
+
+body.light .details p {
+
+    background:
+        rgba(0,0,0,0.05);
+}
+
+
+
+/* =========================
+   WIKI LINK
+========================= */
+
+.wiki-link {
+
+    display: inline-block;
+
+    text-decoration: none;
+
+    padding: 14px 22px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #14b8a6,
+            #06b6d4
+        );
+
+    color: white;
+
+    font-weight: 600;
+
+    transition: 0.3s ease;
+}
+
+
+
+.wiki-link:hover {
+
+    transform: translateY(-2px);
+}
+
+
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+
+#close-btn {
+
+    position: absolute;
+
+    top: 18px;
+
+    right: 18px;
+
+    width: 42px;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    font-size: 1.1rem;
+
+    background: #ef4444;
+
+    color: white;
+
+    transition: 0.3s ease;
+}
+
+
+
+#close-btn:hover {
+
+    transform: rotate(90deg);
+}
+
+
+
+/* =========================
+   POPUP ANIMATION
+========================= */
+
+@keyframes popup {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.85);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width: 900px) {
+
+    .card {
+
+        grid-template-columns: 1fr;
+    }
+
+
+
+    .cat-image {
+
+        min-height: 350px;
+    }
+
+
+
+    .card-content {
+
+        padding: 30px;
+    }
+
+
+
+    .card-content h2 {
+
+        font-size: 2.2rem;
+    }
+
+
+
+    .modal-content {
+
+        padding: 25px;
+    }
+
+
+
+    #modal-body h2 {
+
+        font-size: 2rem;
+    }
+}
+
+
+
+@media(max-width: 600px) {
+
+    .navbar {
+
+        padding: 20px;
+    }
+
+
+
+    .navbar h1 {
+
+        font-size: 1.5rem;
+    }
+
+
+
+    #theme-btn {
+
+        padding: 10px 16px;
+
+        font-size: 0.85rem;
+    }
+
+
+
+    .card-content h2 {
+
+        font-size: 1.8rem;
+    }
+
+
+
+    .cat-image {
+
+        min-height: 280px;
+    }
+
+
+
+    .modal-image {
+
+        height: 260px;
+    }
+}
