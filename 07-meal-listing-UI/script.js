@@ -1,209 +1,103 @@
-const mealsContainer =
-    document.getElementById(
-        "meals-container"
-    );
+const mealsContainer = document.getElementById("meals-container");
 
-const loader =
-    document.getElementById("loader");
+const loader = document.getElementById("loader");
 
-const searchInput =
-    document.getElementById(
-        "search-input"
-    );
+const searchInput = document.getElementById("search-input");
 
-const themeBtn =
-    document.getElementById(
-        "theme-btn"
-    );
+const themeBtn = document.getElementById("theme-btn");
 
-const prevBtn =
-    document.getElementById(
-        "prev-btn"
-    );
+const prevBtn = document.getElementById("prev-btn");
 
-const nextBtn =
-    document.getElementById(
-        "next-btn"
-    );
+const nextBtn = document.getElementById("next-btn");
 
-const pageInfo =
-    document.getElementById(
-        "page-info"
-    );
+const pageInfo = document.getElementById("page-info");
 
-const modal =
-    document.getElementById("modal");
+const modal = document.getElementById("modal");
 
-const modalBody =
-    document.getElementById(
-        "modal-body"
-    );
+const modalBody = document.getElementById("modal-body");
 
-const closeBtn =
-    document.getElementById(
-        "close-btn"
-    );
+const closeBtn = document.getElementById("close-btn");
 
-const API_URL =
-    "https://api.freeapi.app/api/v1/public/meals";
+const API_URL = "https://api.freeapi.app/api/v1/public/meals";
 
 let currentPage = 1;
 
 let allMeals = [];
 
-
-
 console.log("Meals app started");
 
-
-
-const savedTheme =
-    localStorage.getItem("theme");
+const savedTheme = localStorage.getItem("theme");
 
 console.log(savedTheme);
 
 if (savedTheme === "light") {
-
-    document.body.classList.add(
-        "light"
-    );
+  document.body.classList.add("light");
 }
 
+themeBtn.addEventListener("click", () => {
+  console.log("theme button clicked");
 
+  document.body.classList.toggle("light");
 
-themeBtn.addEventListener(
-    "click",
-    () => {
+  if (document.body.classList.contains("light")) {
+    localStorage.setItem("theme", "light");
 
-        console.log(
-            "theme button clicked"
-        );
+    console.log("light theme enabled");
+  } else {
+    localStorage.setItem("theme", "dark");
 
-        document.body.classList.toggle(
-            "light"
-        );
-
-
-
-        if (
-            document.body.classList.contains(
-                "light"
-            )
-        ) {
-
-            localStorage.setItem(
-                "theme",
-                "light"
-            );
-
-            console.log(
-                "light theme enabled"
-            );
-
-        } else {
-
-            localStorage.setItem(
-                "theme",
-                "dark"
-            );
-
-            console.log(
-                "dark theme enabled"
-            );
-        }
-    }
-);
-
-
+    console.log("dark theme enabled");
+  }
+});
 
 async function fetchMeals(page = 1) {
+  try {
+    console.log("fetching meals...");
 
-    try {
+    console.log("current page:", page);
 
-        console.log(
-            "fetching meals..."
-        );
+    loader.style.display = "block";
 
-        console.log(
-            "current page:",
-            page
-        );
+    const response = await fetch(`${API_URL}?page=${page}`);
 
-        loader.style.display = "block";
+    console.log(response);
 
+    const result = await response.json();
 
+    console.log(result);
 
-        const response = await fetch(
-            `${API_URL}?page=${page}`
-        );
+    allMeals = result.data.data;
 
-        console.log(response);
+    console.log(allMeals);
 
+    renderMeals(allMeals);
 
+    updatePagination(result.data);
+  } catch (error) {
+    console.log(error);
 
-        const result =
-            await response.json();
-
-        console.log(result);
-
-
-
-        allMeals =
-            result.data.data;
-
-        console.log(allMeals);
-
-
-
-        renderMeals(allMeals);
-
-
-
-        updatePagination(
-            result.data
-        );
-
-
-
-    } catch (error) {
-
-        console.log(error);
-
-        mealsContainer.innerHTML = `
+    mealsContainer.innerHTML = `
             <h2>
                 Failed to fetch meals
             </h2>
         `;
+  } finally {
+    loader.style.display = "none";
 
-    } finally {
-
-        loader.style.display = "none";
-
-        console.log(
-            "loading finished"
-        );
-    }
+    console.log("loading finished");
+  }
 }
 
-
-
 function renderMeals(meals) {
+  console.log("rendering meals...");
 
-    console.log(
-        "rendering meals..."
-    );
+  console.log(meals);
 
-    console.log(meals);
+  const cards = meals
+    .map((meal) => {
+      console.log(meal);
 
-
-
-    const cards = meals.map((meal) => {
-
-        console.log(meal);
-
-
-
-        return `
+      return `
 
             <div
                 class="meal-card"
@@ -247,10 +141,7 @@ function renderMeals(meals) {
 
                     <p class="tags">
 
-                        ${
-                            meal.strTags ||
-                            "No tags"
-                        }
+                        ${meal.strTags || "No tags"}
 
                     </p>
 
@@ -259,72 +150,32 @@ function renderMeals(meals) {
             </div>
 
         `;
-    }).join("");
+    })
+    .join("");
 
-
-
-    mealsContainer.innerHTML = cards;
+  mealsContainer.innerHTML = cards;
 }
 
-
-
 function openModal(idMeal) {
+  console.log("modal opened");
 
-    console.log(
-        "modal opened"
-    );
+  console.log(idMeal);
 
-    console.log(idMeal);
+  const meal = allMeals.find((item) => item.idMeal === idMeal);
 
+  console.log(meal);
 
+  let ingredients = "";
 
-    const meal =
-        allMeals.find(
-            (item) =>
-                item.idMeal === idMeal
-        );
+  for (let i = 1; i <= 20; i++) {
+    const ingredient = meal[`strIngredient${i}`];
 
+    const measure = meal[`strMeasure${i}`];
 
+    console.log(ingredient, measure);
 
-    console.log(meal);
-
-
-
-    let ingredients = "";
-
-
-
-    for (
-        let i = 1;
-        i <= 20;
-        i++
-    ) {
-
-        const ingredient =
-            meal[
-                `strIngredient${i}`
-            ];
-
-        const measure =
-            meal[
-                `strMeasure${i}`
-            ];
-
-
-
-        console.log(
-            ingredient,
-            measure
-        );
-
-
-
-        if (
-            ingredient &&
-            ingredient.trim() !== ""
-        ) {
-
-            ingredients += `
+    if (ingredient && ingredient.trim() !== "") {
+      ingredients += `
 
                 <li>
 
@@ -334,12 +185,10 @@ function openModal(idMeal) {
                 </li>
 
             `;
-        }
     }
+  }
 
-
-
-    modalBody.innerHTML = `
+  modalBody.innerHTML = `
 
         <img
             src="${meal.strMealThumb}"
@@ -368,14 +217,7 @@ function openModal(idMeal) {
             </span>
 
         </div>
-
-        <p class="instructions">
-
-            ${meal.strInstructions}
-
-        </p>
-
-        <h3>
+<h3>
 
             Ingredients
 
@@ -387,6 +229,33 @@ function openModal(idMeal) {
 
         </ul>
 
+        <h3>
+
+    Instructions
+
+</h3>
+
+<ul class="instructions-list">
+
+    ${meal.strInstructions
+      .split("\r\n")
+      .filter((step) => step.trim() !== "")
+      .map((step) => {
+        return `
+
+                    <li>
+
+                        ${step}
+
+                    </li>
+
+                `;
+      })
+      .join("")}
+
+</ul>
+
+        
         <div class="modal-actions">
 
             <a
@@ -413,154 +282,81 @@ function openModal(idMeal) {
 
     `;
 
-
-
-    modal.style.display = "flex";
+  modal.style.display = "flex";
 }
 
+closeBtn.addEventListener("click", () => {
+  console.log("modal closed");
 
+  modal.style.display = "none";
+});
 
-closeBtn.addEventListener(
-    "click",
-    () => {
+window.addEventListener("click", (e) => {
+  console.log(e.target);
 
-        console.log(
-            "modal closed"
-        );
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
 
-        modal.style.display =
-            "none";
-    }
-);
+searchInput.addEventListener("input", (e) => {
+  console.log("searching...");
 
+  console.log(e.target.value);
 
+  const value = e.target.value.toLowerCase();
 
-window.addEventListener(
-    "click",
-    (e) => {
+  const filteredMeals = allMeals.filter((meal) => {
+    return meal.strMeal.toLowerCase().includes(value);
+  });
 
-        console.log(e.target);
+  console.log(filteredMeals);
 
-        if (e.target === modal) {
-
-            modal.style.display =
-                "none";
-        }
-    }
-);
-
-
-
-searchInput.addEventListener(
-    "input",
-    (e) => {
-
-        console.log(
-            "searching..."
-        );
-
-        console.log(e.target.value);
-
-
-
-        const value =
-            e.target.value.toLowerCase();
-
-
-
-        const filteredMeals =
-            allMeals.filter((meal) => {
-
-                return meal.strMeal
-                    .toLowerCase()
-                    .includes(value);
-            });
-
-
-
-        console.log(filteredMeals);
-
-
-
-        renderMeals(filteredMeals);
-    }
-);
-
-
+  renderMeals(filteredMeals);
+});
 
 function updatePagination(data) {
+  console.log("updating pagination");
 
-    console.log(
-        "updating pagination"
-    );
+  console.log(data);
 
-    console.log(data);
+  pageInfo.innerText = `Page ${data.page} of ${data.totalPages}`;
 
+  prevBtn.disabled = !data.previousPage;
 
-
-    pageInfo.innerText =
-        `Page ${data.page} of ${data.totalPages}`;
-
-
-
-    prevBtn.disabled =
-        !data.previousPage;
-
-    nextBtn.disabled =
-        !data.nextPage;
+  nextBtn.disabled = !data.nextPage;
 }
 
+prevBtn.addEventListener("click", () => {
+  console.log("previous clicked");
 
+  if (currentPage > 1) {
+    currentPage--;
 
-prevBtn.addEventListener(
-    "click",
-    () => {
+    console.log(currentPage);
 
-        console.log(
-            "previous clicked"
-        );
+    fetchMeals(currentPage);
 
-        if (currentPage > 1) {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+});
 
-            currentPage--;
+nextBtn.addEventListener("click", () => {
+  console.log("next clicked");
 
-            console.log(
-                currentPage
-            );
+  currentPage++;
 
-            fetchMeals(currentPage);
+  console.log(currentPage);
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        }
-    }
-);
+  fetchMeals(currentPage);
 
-
-
-nextBtn.addEventListener(
-    "click",
-    () => {
-
-        console.log(
-            "next clicked"
-        );
-
-        currentPage++;
-
-        console.log(currentPage);
-
-        fetchMeals(currentPage);
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    }
-);
-
-
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+});
 
 fetchMeals(currentPage);

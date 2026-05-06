@@ -955,3 +955,61 @@ body.light .ingredients-list li {
         text-align: center;
     }
 }
+
+.instructions-list {
+
+    margin-top: 20px;
+
+    margin-bottom: 35px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+    list-style: none;
+}
+
+
+
+.instructions-list li {
+
+    padding: 18px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    line-height: 1.9;
+
+    position: relative;
+
+    padding-left: 55px;
+}
+
+
+
+.instructions-list li::before {
+
+    content: "•";
+
+    position: absolute;
+
+    left: 24px;
+
+    top: 18px;
+
+    font-size: 1.4rem;
+
+    color: #ff4d6d;
+}
+
+
+
+body.light .instructions-list li {
+
+    background:
+        rgba(0,0,0,0.05);
+}
