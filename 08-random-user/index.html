@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>
+        Random Users UI
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    />
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <h1>
+            Random Users UI
+        </h1>
+
+        <div class="nav-actions">
+
+            <input
+                type="text"
+                id="search-input"
+                placeholder="Search users..."
+            />
+
+            <button id="theme-btn">
+
+                Toggle Theme
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <div class="filters">
+
+        <button
+            class="filter-btn active"
+            data-filter="all"
+        >
+            All
+        </button>
+
+        <button
+            class="filter-btn"
+            data-filter="male"
+        >
+            Male
+        </button>
+
+        <button
+            class="filter-btn"
+            data-filter="female"
+        >
+            Female
+        </button>
+
+    </div>
+
+
+
+    <main
+        id="users-container"
+        class="users-container"
+    >
+
+    </main>
+
+
+
+    <div id="loader">
+
+        Loading users...
+
+    </div>
+
+
+
+    <div class="pagination">
+
+        <button
+            id="prev-btn"
+            class="page-btn"
+        >
+            ❮
+        </button>
+
+        <span id="page-info">
+
+            Page 1
+
+        </span>
+
+        <button
+            id="next-btn"
+            class="page-btn"
+        >
+            ❯
+        </button>
+
+    </div>
+
+
+
+    <div id="modal" class="modal">
+
+        <div class="modal-content">
+
+            <button id="close-btn">
+
+                ✕
+
+            </button>
+
+            <div id="modal-body">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
