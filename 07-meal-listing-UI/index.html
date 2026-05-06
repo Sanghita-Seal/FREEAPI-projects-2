@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <meta
+        name="viewport"
+        content="
+            width=device-width,
+            initial-scale=1.0
+        "
+    />
+
+    <title>
+        Meals Explorer
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    />
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <h1>
+            Meals Explorer
+        </h1>
+
+        <div class="nav-actions">
+
+            <input
+                type="text"
+                id="search-input"
+                placeholder="Search meals..."
+            />
+
+            <button id="theme-btn">
+
+                Toggle Theme
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <main
+        id="meals-container"
+        class="meals-container"
+    >
+
+    </main>
+
+
+
+    <div id="loader">
+
+        Loading meals...
+
+    </div>
+
+
+
+    <!-- PAGINATION -->
+
+    <div class="pagination">
+
+        <button
+            id="prev-btn"
+            class="page-btn"
+        >
+
+            ❮
+
+        </button>
+
+
+
+        <span id="page-info">
+
+            Page 1
+
+        </span>
+
+
+
+        <button
+            id="next-btn"
+            class="page-btn"
+        >
+
+            ❯
+
+        </button>
+
+    </div>
+
+
+
+    <!-- MODAL -->
+
+    <div id="modal" class="modal">
+
+        <div class="modal-content">
+
+            <button id="close-btn">
+
+                ✕
+
+            </button>
+
+            <div id="modal-body">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
